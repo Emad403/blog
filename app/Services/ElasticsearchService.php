@@ -4,12 +4,9 @@ namespace App\Services;
 
 use Elastic\Elasticsearch\ClientBuilder;
 
-class ElasticService
+class ElasticsearchService
 {
     protected $client;
-    private $config = [
-      '127.0.0.1:9200',
-    ];
     
 
     public function __construct()
@@ -29,8 +26,8 @@ class ElasticService
         return $this->client->index($params);
     }
 
-    public function delete(array $params)
+    public function update(array $params)
     {
-        return $this->client->delete($params);
+        return $this->client->update($params);
     }
 }

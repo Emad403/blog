@@ -112,12 +112,9 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
         'elastic' => [
-            'driver' => 'elastic',
-            'url' => env('DB_URL'),
-            'host' => env('ELASTICSEARCH_HOST', '127.0.0.1'),
-            'port' => env('ELASTICSEARCH_PORT', '9200'),
-            'username' => env('DB_USERNAME', 'root'),
-            'password' => env('ELASTICSEARCH_PASSWORD', ''),
+            'host' => [
+                env('ELASTIC_HOST', '127.0.0.1:9200'),
+            ]
         ],
 
     ],

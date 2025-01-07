@@ -11,8 +11,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(\App\Services\ElasticService::class, function ($app) {
-            return new \App\Services\ElasticService();
+        $this->app->singleton(\App\Services\ElasticsearchService::class, function ($app) {
+            return new \App\Services\ElasticsearchService();
         });
     }
 
