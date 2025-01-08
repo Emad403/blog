@@ -369,6 +369,9 @@ class ElasticsearchController extends Controller
     }
 
     // we could also implement pagination if needed
+    // this is finding on all index if needed we could have specified the platform as and input
+    // to use the specified platform index for our search or have multiple api calls for different
+    // indexed and use cases
     public function searchData(Request $request)
     {
         $validated = $request->validate([
