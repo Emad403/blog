@@ -1,0 +1,57 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: dataak-laravel-app
+    working_dir: /var/www
+    volumes:
+      - .:/var/www
+    ports:
+      - "9800:9800"
+    networks:
+      - laravel-network
+    depends_on:
+      - db
+      - elasticsearch
+
+  db:
+    image: postgres:13
+    container_name: dataak-postgres-db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 7V9!wY6vLquWVS
+      POSTGRES_DB: blog
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - laravel-network
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    restart: unless-stopped
+    container_name: dataak-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false  # Disable security for simplicity; not recommended for production
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    ports:
+      - "9201:9200"
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+    networks:
+      - laravel-network
+
+networks:
+  laravel-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
+  elastic_data:
+    driver: local

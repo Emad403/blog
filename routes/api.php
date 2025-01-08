@@ -8,14 +8,17 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+Route::get('/add-fake',[ElasticsearchController::class, 'addFakeData']);
+
+
 Route::post('/add-user',[ElasticsearchController::class, 'addUser']);
 Route::post('/set-user-notifier',[ElasticsearchController::class, 'addUserNotifier']);
 Route::get('/users',[ElasticsearchController::class, 'getUsers']);
+Route::get('/user',[ElasticsearchController::class, 'getUser']);
 
-Route::get('/search', [ElasticsearchController::class, 'search']);
-Route::get('/search-data', [ElasticsearchController::class, 'searchData']);
-Route::get('/index', [ElasticsearchController::class, 'indexDocument']);
-Route::post('/in', [ElasticsearchController::class, 'in']);
 Route::post('/add-news', [ElasticsearchController::class, 'addNews']);
 Route::post('/add-instagram', [ElasticsearchController::class, 'addInstagram']);
 Route::post('/add-twitter', [ElasticsearchController::class, 'addTwitter']);
+Route::post('/add-post', [ElasticsearchController::class, 'addPost']);
+
+Route::get('/search-data', [ElasticsearchController::class, 'searchData']);
